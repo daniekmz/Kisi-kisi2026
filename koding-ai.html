@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koding & AI – Kisi-Kisi STS | SMK Veteran 1 Sukoharjo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --surface: #181c27;
+    --card: #1e2333;
+    --border: rgba(255,255,255,0.08);
+    --accent: #a78bfa;
+    --accent-glow: rgba(167,139,250,0.3);
+    --accent2: #7c3aed;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --gold: #fbbf24;
+    --green: #34d399;
+    --radius: 20px;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'Nunito', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    padding: clamp(14px, 3vw, 24px) clamp(16px, 5vw, 48px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(15,17,23,0.9);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo-badge {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .logo-text h1 {
+    font-family: var(--font-head);
+    font-size: clamp(13px, 3vw, 16px);
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .logo-text p {
+    font-size: clamp(10px, 2vw, 12px);
+    color: var(--muted);
+  }
+
+  .back-btn {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 16px;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.3);
+    color: var(--accent);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .back-btn:hover { background: rgba(167,139,250,0.2); }
+
+  /* HERO */
+  .hero {
+    padding: clamp(32px, 8vw, 72px) clamp(16px, 5vw, 48px) clamp(24px, 6vw, 48px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: min(500px, 110vw);
+    height: 260px;
+    background: radial-gradient(ellipse, rgba(167,139,250,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.3);
+    color: var(--accent);
+    font-size: clamp(11px, 2.5vw, 13px);
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero h2 {
+    font-family: var(--font-head);
+    font-size: clamp(26px, 7vw, 52px);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #ffffff 30%, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: clamp(13px, 3vw, 16px);
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* TABS */
+  .tabs-wrapper {
+    padding: clamp(20px, 4vw, 32px) clamp(16px, 5vw, 48px) 0;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: clamp(12px, 2.5vw, 14px);
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(167,139,250,0.4);
+  }
+
+  .tab-btn:hover:not(.active) {
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+  }
+
+  /* CONTENT */
+  .content {
+    padding: clamp(20px, 4vw, 32px) clamp(16px, 5vw, 48px) clamp(60px, 10vw, 80px);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* TABLE */
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(16px, 4vw, 22px);
+    color: var(--text);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(12px, 2vw, 14px);
+    min-width: 600px;
+  }
+
+  thead th {
+    background: rgba(167,139,250,0.12);
+    color: var(--accent);
+    font-weight: 800;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+  tbody td {
+    padding: 12px 14px;
+    color: var(--text);
+    line-height: 1.6;
+    vertical-align: top;
+  }
+
+  td .no-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  td .materi-chip {
+    display: inline-block;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.25);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  td .skor-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(251,191,36,0.12);
+    border: 1px solid rgba(251,191,36,0.3);
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  /* SOAL */
+  .soal-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: clamp(20px, 4vw, 28px);
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .soal-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    border-radius: 4px 0 0 4px;
+  }
+
+  .soal-card:hover {
+    border-color: rgba(167,139,250,0.3);
+    box-shadow: 0 8px 32px rgba(167,139,250,0.12);
+  }
+
+  .soal-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 900;
+    font-family: var(--font-head);
+    margin-bottom: 12px;
+    box-shadow: 0 4px 16px rgba(167,139,250,0.4);
+  }
+
+  .soal-text {
+    font-size: clamp(13px, 2.5vw, 15px);
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .soal-meta {
+    margin-top: 12px;
+    display: flex; align-items: center; gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  /* KUNCI */
+  .kunci-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .kunci-card:hover { border-color: rgba(167,139,250,0.2); }
+
+  .kunci-header {
+    padding: clamp(16px, 3vw, 20px) clamp(20px, 4vw, 28px);
+    display: flex; align-items: flex-start; gap: 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .kunci-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 900;
+    font-family: var(--font-head);
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px rgba(167,139,250,0.35);
+  }
+
+  .kunci-q {
+    flex: 1;
+    font-size: clamp(13px, 2.5vw, 14px);
+    line-height: 1.65;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .kunci-toggle {
+    color: var(--accent);
+    font-size: 20px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    line-height: 1;
+    margin-top: 4px;
+  }
+
+  .kunci-card.open .kunci-toggle { transform: rotate(180deg); }
+
+  .kunci-body {
+    display: none;
+    padding: 0 clamp(20px, 4vw, 28px) clamp(16px, 3vw, 20px);
+    border-top: 1px solid var(--border);
+  }
+
+  .kunci-card.open .kunci-body { display: block; }
+
+  .kunci-answer {
+    padding-top: 14px;
+    font-size: clamp(13px, 2.5vw, 14px);
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .kunci-answer p { margin-bottom: 8px; }
+  .kunci-answer ul { padding-left: 20px; }
+  .kunci-answer ul li { margin-bottom: 6px; }
+
+  .answer-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+    margin-top: 4px;
+  }
+
+  .kunci-body .sub-title {
+    font-weight: 800;
+    color: var(--accent);
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: clamp(16px, 3vw, 24px) clamp(16px, 5vw, 48px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-chip {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 480px) {
+    .tabs { gap: 4px; }
+    .tab-btn { min-width: 0; font-size: 12px; padding: 9px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">🤖</div>
+  <div class="logo-text">
+    <h1>Koding & AI – Kelas X</h1>
+    <p>Kisi-Kisi STS Genap 2025/2026</p>
+  </div>
+  <a href="index.html" class="back-btn">← Kembali</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-tag">🤖 Mapel Pilihan · Koding & AI</div>
+    <h2>Kisi-Kisi, Soal &<br>Kunci Jawaban</h2>
+    <p>STS Genap · SMK Veteran 1 Sukoharjo · Kurikulum Merdeka</p>
+  </section>
+
+  <div class="tabs-wrapper">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('kisi')">📋 Kisi-Kisi</button>
+      <button class="tab-btn" onclick="switchTab('soal')">📝 Soal</button>
+      <button class="tab-btn" onclick="switchTab('kunci')">🔑 Kunci Jawaban</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ===== KISI-KISI ===== -->
+    <div class="tab-panel active" id="panel-kisi">
+      <h3 class="section-title">📋 Kisi-Kisi Soal Sumatif Tengah Semester</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Materi</th>
+              <th>Tujuan Pembelajaran</th>
+              <th>No. Soal</th>
+              <th>Skor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="no-badge">1</span></td>
+              <td><span class="materi-chip">Pengertian & Elemen Multimedia</span></td>
+              <td>Peserta didik dapat menjelaskan pengertian multimedia dan mengidentifikasi 5 elemen media</td>
+              <td style="text-align:center">1</td>
+              <td><span class="skor-badge">20</span></td>
+            </tr>
+            <tr>
+              <td><span class="no-badge">2</span></td>
+              <td><span class="materi-chip">Jenis Multimedia</span></td>
+              <td>Peserta didik dapat membedakan multimedia konvensional dan digital dari aspek cara penyajian dan teknologi yang digunakan</td>
+              <td style="text-align:center">2</td>
+              <td><span class="skor-badge">20</span></td>
+            </tr>
+            <tr>
+              <td><span class="no-badge">3</span></td>
+              <td><span class="materi-chip">Tahapan Produksi Multimedia</span></td>
+              <td>Peserta didik dapat menjelaskan tahapan produksi konten multimedia</td>
+              <td style="text-align:center">3</td>
+              <td><span class="skor-badge">20</span></td>
+            </tr>
+            <tr>
+              <td><span class="no-badge">4</span></td>
+              <td><span class="materi-chip">Perangkat Lunak AI & Multimedia</span></td>
+              <td>Peserta didik dapat mengidentifikasi minimal 3 perangkat lunak berbasis AI untuk berbagai jenis konten multimedia</td>
+              <td style="text-align:center">4</td>
+              <td><span class="skor-badge">20</span></td>
+            </tr>
+            <tr>
+              <td><span class="no-badge">5</span></td>
+              <td><span class="materi-chip">Perangkat Lunak AI & Multimedia</span></td>
+              <td>Peserta didik dapat menjelaskan bagaimana AI membuat konten lebih menarik dan interaktif</td>
+              <td style="text-align:center">5</td>
+              <td><span class="skor-badge">20</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color:var(--muted);font-size:13px;text-align:center;padding: 8px 0 4px;">Capaian Pembelajaran: Memahami konsep dasar multimedia, mengidentifikasi jenis-jenis multimedia, menguasai tahapan produksi konten, serta mampu memanfaatkan teknologi kecerdasan artificial dalam menciptakan konten multimedia.</p>
+    </div>
+
+    <!-- ===== SOAL ===== -->
+    <div class="tab-panel" id="panel-soal">
+      <h3 class="section-title">📝 Soal Essay</h3>
+
+      <div class="soal-card">
+        <div class="soal-number">1</div>
+        <p class="soal-text">Jelaskan apa yang dimaksud dengan <strong>multimedia</strong> dan sebutkan minimal <strong>5 elemen media</strong> yang dapat digabungkan dalam multimedia!</p>
+        <div class="soal-meta">
+          <span class="meta-chip">🎬 Pengertian & Elemen Multimedia</span>
+          <span class="meta-chip">⭐ Skor: 20</span>
+        </div>
+      </div>
+
+      <div class="soal-card">
+        <div class="soal-number">2</div>
+        <p class="soal-text">Multimedia dapat dikategorikan menjadi dua jenis utama, yaitu <strong>multimedia konvensional dan multimedia digital</strong>. Jelaskan perbedaan mendasar antara kedua jenis multimedia tersebut dari segi cara penyajian dan teknologi yang digunakan!</p>
+        <div class="soal-meta">
+          <span class="meta-chip">📺 Jenis Multimedia</span>
+          <span class="meta-chip">⭐ Skor: 20</span>
+        </div>
+      </div>
+
+      <div class="soal-card">
+        <div class="soal-number">3</div>
+        <p class="soal-text">Produksi konten multimedia merupakan proses yang kompleks dan membutuhkan perencanaan yang matang. Sebutkan <strong>tahapan-tahapan</strong> yang harus dilakukan dalam produksi konten multimedia!</p>
+        <div class="soal-meta">
+          <span class="meta-chip">🎥 Tahapan Produksi</span>
+          <span class="meta-chip">⭐ Skor: 20</span>
+        </div>
+      </div>
+
+      <div class="soal-card">
+        <div class="soal-number">4</div>
+        <p class="soal-text">Sebutkan minimal <strong>3 perangkat lunak berbasis AI</strong> yang dapat digunakan untuk mengolah berbagai jenis konten multimedia (gambar, video, audio, animasi)!</p>
+        <div class="soal-meta">
+          <span class="meta-chip">🤖 Perangkat Lunak AI</span>
+          <span class="meta-chip">⭐ Skor: 20</span>
+        </div>
+      </div>
+
+      <div class="soal-card">
+        <div class="soal-number">5</div>
+        <p class="soal-text">Bagaimana <strong>AI dapat membantu</strong> membuat konten multimedia menjadi lebih menarik dan interaktif?</p>
+        <div class="soal-meta">
+          <span class="meta-chip">✨ AI & Konten Interaktif</span>
+          <span class="meta-chip">⭐ Skor: 20</span>
+        </div>
+      </div>
+
+      <p style="color:var(--muted);font-size:12px;text-align:center;margin-top:8px;">Apabila lembar jawaban tidak muat dapat dikerjakan di lembar sebaliknya!</p>
+    </div>
+
+    <!-- ===== KUNCI JAWABAN ===== -->
+    <div class="tab-panel" id="panel-kunci">
+      <h3 class="section-title">🔑 Kunci Jawaban</h3>
+
+      <!-- Soal 1 -->
+      <div class="kunci-card" onclick="toggleKunci(this)">
+        <div class="kunci-header">
+          <span class="kunci-num">1</span>
+          <span class="kunci-q">Jelaskan apa yang dimaksud dengan multimedia dan sebutkan minimal 5 elemen media yang dapat digabungkan dalam multimedia!</span>
+          <span class="kunci-toggle">⌄</span>
+        </div>
+        <div class="kunci-body">
+          <div class="kunci-answer">
+            <div class="answer-label">✅ Kunci Jawaban</div>
+            <p>Multimedia adalah gabungan dari berbagai elemen media seperti teks, gambar, suara, animasi, dan video yang digabungkan menjadi satu kesatuan untuk menyampaikan informasi atau hiburan secara interaktif.</p>
+            <p class="sub-title">Lima elemen media dalam multimedia:</p>
+            <ul>
+              <li><strong>Teks</strong> – Menyampaikan informasi tertulis, judul, deskripsi</li>
+              <li><strong>Gambar</strong> – Visual statis seperti foto, ilustrasi, grafik</li>
+              <li><strong>Suara/Audio</strong> – Musik, narasi, efek suara untuk mendukung informasi</li>
+              <li><strong>Animasi</strong> – Gambar bergerak yang membuat presentasi lebih dinamis</li>
+              <li><strong>Video</strong> – Gabungan gambar bergerak dan audio yang menyampaikan informasi secara audiovisual</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soal 2 -->
+      <div class="kunci-card" onclick="toggleKunci(this)">
+        <div class="kunci-header">
+          <span class="kunci-num">2</span>
+          <span class="kunci-q">Jelaskan perbedaan mendasar antara multimedia konvensional dan multimedia digital dari segi cara penyajian dan teknologi yang digunakan!</span>
+          <span class="kunci-toggle">⌄</span>
+        </div>
+        <div class="kunci-body">
+          <div class="kunci-answer">
+            <div class="answer-label">✅ Kunci Jawaban</div>
+            <p class="sub-title">Multimedia Konvensional:</p>
+            <ul>
+              <li><strong>Cara penyajian:</strong> Linear dan satu arah, pengguna hanya menerima informasi tanpa bisa berinteraksi</li>
+              <li><strong>Teknologi:</strong> Menggunakan teknologi analog seperti proyektor slide, overhead projector, kaset audio/video</li>
+            </ul>
+            <p class="sub-title">Multimedia Digital:</p>
+            <ul>
+              <li><strong>Cara penyajian:</strong> Dapat non-linear dan interaktif, pengguna dapat memilih alur informasi sendiri</li>
+              <li><strong>Teknologi:</strong> Menggunakan teknologi digital seperti komputer, smartphone, internet, aplikasi digital</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soal 3 -->
+      <div class="kunci-card" onclick="toggleKunci(this)">
+        <div class="kunci-header">
+          <span class="kunci-num">3</span>
+          <span class="kunci-q">Sebutkan tahapan-tahapan yang harus dilakukan dalam produksi konten multimedia!</span>
+          <span class="kunci-toggle">⌄</span>
+        </div>
+        <div class="kunci-body">
+          <div class="kunci-answer">
+            <div class="answer-label">✅ Kunci Jawaban</div>
+            <p class="sub-title">Tahapan produksi konten multimedia:</p>
+            <ul>
+              <li><strong>Perencanaan (Pre-Production)</strong></li>
+              <li><strong>Produksi (Production)</strong></li>
+              <li><strong>Pasca Produksi (Post-Production)</strong></li>
+              <li><strong>Pengujian dan Evaluasi (Testing)</strong></li>
+              <li><strong>Distribusi dan Publikasi (Distribution)</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soal 4 -->
+      <div class="kunci-card" onclick="toggleKunci(this)">
+        <div class="kunci-header">
+          <span class="kunci-num">4</span>
+          <span class="kunci-q">Sebutkan minimal 3 perangkat lunak berbasis AI yang dapat digunakan untuk mengolah berbagai jenis konten multimedia (gambar, video, audio, animasi)!</span>
+          <span class="kunci-toggle">⌄</span>
+        </div>
+        <div class="kunci-body">
+          <div class="kunci-answer">
+            <div class="answer-label">✅ Kunci Jawaban</div>
+            <p class="sub-title">Perangkat lunak berbasis AI untuk multimedia:</p>
+            <ul>
+              <li><strong>Gambar:</strong> Midjourney, Adobe Photoshop, Remove.bg</li>
+              <li><strong>Video:</strong> Capcut, Adobe Premiere Pro, Descript</li>
+              <li><strong>Audio:</strong> ElevenLabs, Suno AI, Adobe Podcast AI</li>
+              <li><strong>Animasi:</strong> Animated Drawings (Meta), D-ID, Synthesia</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soal 5 -->
+      <div class="kunci-card" onclick="toggleKunci(this)">
+        <div class="kunci-header">
+          <span class="kunci-num">5</span>
+          <span class="kunci-q">Bagaimana AI dapat membantu membuat konten multimedia menjadi lebih menarik dan interaktif?</span>
+          <span class="kunci-toggle">⌄</span>
+        </div>
+        <div class="kunci-body">
+          <div class="kunci-answer">
+            <div class="answer-label">✅ Kunci Jawaban</div>
+            <p class="sub-title">Bagaimana AI membuat konten lebih menarik dan interaktif:</p>
+            <ul>
+              <li>AI dapat menyesuaikan konten berdasarkan preferensi pengguna</li>
+              <li>AI dapat memberikan respons otomatis terhadap input pengguna (chatbot, voice assistant)</li>
+              <li>AI memungkinkan creator menghasilkan konten berkualitas profesional meskipun dengan skill terbatas</li>
+              <li>AI dapat menghasilkan ide dan variasi konten yang tidak terbatas</li>
+              <li>AI dapat memproses dan menyajikan konten secara real-time untuk pengalaman yang lebih interaktif</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="info-chip"><span>🏫</span> SMK Veteran 1 Sukoharjo</div>
+  <div class="info-chip"><span>📅</span> Februari 2026</div>
+  <div class="info-chip"><span>👩‍🏫</span> Keke Rachma Devi, S.Kom</div>
+  <div class="info-chip"><span>📚</span> Kurikulum Merdeka</div>
+</footer>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', ['kisi','soal','kunci'][i] === tab);
+    });
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleKunci(card) {
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
