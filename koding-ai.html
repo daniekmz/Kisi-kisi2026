@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kisi-Kisi Koding & AI – SMK Veteran 1 Sukoharjo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0a1a;
+    --surface: #120f22;
+    --card: #1a1630;
+    --card2: #150f2a;
+    --border: rgba(167,139,250,0.12);
+    --accent: #a78bfa;
+    --accent2: #c4b5fd;
+    --glow: rgba(167,139,250,0.25);
+    --green: #34d399;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --text: #ede8f8;
+    --muted: #8878a8;
+    --radius: 18px;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'Nunito', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  nav {
+    padding: 14px clamp(16px, 5vw, 48px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(13,10,26,0.9);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .back-btn {
+    display: flex; align-items: center; gap: 6px;
+    text-decoration: none;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 700;
+    background: rgba(167,139,250,0.1);
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(167,139,250,0.2);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .back-btn:hover { background: rgba(167,139,250,0.18); transform: translateX(-2px); }
+  nav h1 {
+    font-family: var(--font-head);
+    font-size: clamp(14px, 3vw, 18px);
+    color: var(--text);
+    flex: 1;
+  }
+  .badge {
+    font-size: 12px; font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: rgba(167,139,250,0.15);
+    border: 1px solid rgba(167,139,250,0.3);
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .page-hero {
+    background: linear-gradient(135deg, rgba(167,139,250,0.08) 0%, transparent 60%);
+    border-bottom: 1px solid var(--border);
+    padding: clamp(24px, 5vw, 48px) clamp(16px, 5vw, 48px);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::after {
+    content: '🤖';
+    position: absolute;
+    right: clamp(16px, 5vw, 60px);
+    top: 50%; transform: translateY(-50%);
+    font-size: clamp(60px, 15vw, 120px);
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  .page-hero .tag {
+    font-size: 12px; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .page-hero h2 {
+    font-family: var(--font-head);
+    font-size: clamp(22px, 5vw, 40px);
+    margin-bottom: 10px;
+  }
+  .page-hero p { color: var(--muted); font-size: clamp(13px, 2.5vw, 15px); }
+
+  .meta-chips {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
+  }
+  .meta-chip {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  main {
+    padding: clamp(30px, 6vw, 60px) clamp(16px, 5vw, 48px);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(18px, 4vw, 24px);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--border); margin-left: 8px;
+  }
+
+  /* KISI-KISI CARDS */
+  .kisi-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+
+  .kisi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.2s;
+  }
+  .kisi-card:hover { box-shadow: 0 8px 32px var(--glow); transform: translateY(-2px); }
+
+  .kisi-header {
+    padding: 18px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    cursor: pointer; user-select: none;
+  }
+  .soal-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent), #7c3aed);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 16px; color: #fff;
+    flex-shrink: 0;
+  }
+  .kisi-meta { flex: 1; }
+  .materi-name { font-weight: 800; font-size: clamp(14px,3vw,16px); color: var(--text); margin-bottom: 4px; }
+  .tujuan-text { font-size: clamp(12px,2.5vw,13px); color: var(--muted); line-height: 1.6; }
+
+  .difficulty-bar { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .diff-badge {
+    font-size: 11px; font-weight: 700; padding: 3px 10px;
+    border-radius: 100px; letter-spacing: 0.5px;
+  }
+  .diff-badge.easy { background: rgba(52,211,153,0.15); color: var(--green); border: 1px solid rgba(52,211,153,0.3); }
+  .diff-badge.medium { background: rgba(251,191,36,0.15); color: var(--yellow); border: 1px solid rgba(251,191,36,0.3); }
+  .diff-badge.hard { background: rgba(248,113,113,0.15); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+  .diff-badge.essay { background: rgba(167,139,250,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+
+  .toggle-btn { font-size: 18px; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; margin-top: 2px; }
+  .kisi-card.open .toggle-btn { transform: rotate(180deg); }
+
+  .kisi-body { display: none; border-top: 1px solid var(--border); }
+  .kisi-card.open .kisi-body { display: block; }
+
+  .soal-section { padding: 16px 20px; background: var(--card2); }
+  .soal-label { font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+  .soal-text {
+    font-size: clamp(13px, 2.5vw, 15px);
+    line-height: 1.8; color: var(--text);
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+    margin-bottom: 0;
+  }
+
+  .kunci-section {
+    padding: 16px 20px;
+    background: rgba(52,211,153,0.03);
+    border-top: 1px solid rgba(52,211,153,0.1);
+  }
+  .kunci-label {
+    font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .kunci-item {
+    padding: 10px 14px;
+    background: rgba(52,211,153,0.05);
+    border: 1px solid rgba(52,211,153,0.12);
+    border-radius: 10px; margin-bottom: 8px;
+    font-size: clamp(13px,2.5vw,14px); line-height: 1.7;
+    color: var(--text); display: flex; gap: 10px;
+  }
+  .kunci-item:last-child { margin-bottom: 0; }
+  .kunci-bullet { color: var(--green); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+
+  /* NOTE BOX */
+  .upload-note {
+    background: rgba(167,139,250,0.06);
+    border: 2px dashed rgba(167,139,250,0.3);
+    border-radius: var(--radius);
+    padding: clamp(24px, 5vw, 40px);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .upload-note .emoji { font-size: 48px; margin-bottom: 12px; }
+  .upload-note h3 {
+    font-family: var(--font-head);
+    font-size: 18px; color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .upload-note p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+  /* TOPICS PREVIEW */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .topic-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 14px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .topic-card:hover {
+    border-color: rgba(167,139,250,0.3);
+    box-shadow: 0 4px 20px var(--glow);
+    transform: translateY(-3px);
+  }
+  .topic-card .t-icon { font-size: 28px; margin-bottom: 8px; }
+  .topic-card h4 { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+  .topic-card p { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: clamp(20px, 4vw, 28px) clamp(16px, 5vw, 48px);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="back-btn">← Beranda</a>
+  <h1>Koding & AI – Kelas X</h1>
+  <span class="badge">STS Genap</span>
+</nav>
+
+<div class="page-hero">
+  <div class="tag">🤖 Kisi-Kisi Lengkap</div>
+  <h2>Koding & AI – Kelas X</h2>
+  <p>SMK Veteran 1 Sukoharjo · Tahun Ajaran 2025/2026</p>
+  <div class="meta-chips">
+    <div class="meta-chip">📚 5 Soal Essay</div>
+    <div class="meta-chip">👩‍🏫 Keke Rachma Devi, S.Kom</div>
+    <div class="meta-chip">📋 Kurikulum Merdeka</div>
+    <div class="meta-chip">⭐ Total Skor 100</div>
+  </div>
+</div>
+
+<main>
+
+  <h2 class="section-title">📋 Kisi-Kisi & Kunci Jawaban</h2>
+  <p style="color:var(--muted); font-size:13px; margin-bottom:20px;">Klik setiap soal untuk melihat detail dan kunci jawaban ✨</p>
+
+  <div class="kisi-list">
+
+    <!-- SOAL 1 -->
+    <div class="kisi-card" onclick="toggleCard(this)">
+      <div class="kisi-header">
+        <div class="soal-num">1</div>
+        <div class="kisi-meta">
+          <div class="materi-name">🧠 Konsep Kecerdasan Buatan (AI)</div>
+          <div class="tujuan-text">Memahami definisi, sejarah, dan konsep dasar kecerdasan buatan serta penerapannya</div>
+          <div class="difficulty-bar">
+            <span class="diff-badge easy">Mudah</span>
+            <span class="diff-badge essay">Essay</span>
+            <span class="diff-badge easy">Skor 20</span>
+          </div>
+        </div>
+        <div class="toggle-btn">▼</div>
+      </div>
+      <div class="kisi-body">
+        <div class="soal-section">
+          <div class="soal-label">❓ Soal</div>
+          <div class="soal-text">Jelaskan apa yang dimaksud dengan <strong>kecerdasan buatan (Artificial Intelligence/AI)</strong> dan berikan minimal 3 contoh penerapan AI dalam kehidupan sehari-hari!</div>
+        </div>
+        <div class="kunci-section">
+          <div class="kunci-label">✅ Kunci Jawaban</div>
+          <div class="kunci-item">
+            <span class="kunci-bullet">📌</span>
+            <div>Silakan unggah file dokumen Koding AI untuk melihat kunci jawaban lengkap.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 2 -->
+    <div class="kisi-card" onclick="toggleCard(this)">
+      <div class="kisi-header">
+        <div class="soal-num">2</div>
+        <div class="kisi-meta">
+          <div class="materi-name">🔁 Algoritma & Pemrograman Dasar</div>
+          <div class="tujuan-text">Memahami konsep algoritma dan langkah-langkah pembuatan program sederhana</div>
+          <div class="difficulty-bar">
+            <span class="diff-badge medium">Sedang</span>
+            <span class="diff-badge essay">Essay</span>
+            <span class="diff-badge easy">Skor 20</span>
+          </div>
+        </div>
+        <div class="toggle-btn">▼</div>
+      </div>
+      <div class="kisi-body">
+        <div class="soal-section">
+          <div class="soal-label">❓ Soal</div>
+          <div class="soal-text">Apa yang dimaksud dengan <strong>algoritma</strong> dalam pemrograman? Jelaskan perbedaan antara algoritma dengan program dan berikan contoh algoritma sederhana!</div>
+        </div>
+        <div class="kunci-section">
+          <div class="kunci-label">✅ Kunci Jawaban</div>
+          <div class="kunci-item">
+            <span class="kunci-bullet">📌</span>
+            <div>Silakan unggah file dokumen Koding AI untuk melihat kunci jawaban lengkap.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 3 -->
+    <div class="kisi-card" onclick="toggleCard(this)">
+      <div class="kisi-header">
+        <div class="soal-num">3</div>
+        <div class="kisi-meta">
+          <div class="materi-name">🤖 Machine Learning & Deep Learning</div>
+          <div class="tujuan-text">Menjelaskan konsep machine learning dan perbedaannya dengan AI konvensional</div>
+          <div class="difficulty-bar">
+            <span class="diff-badge medium">Sedang</span>
+            <span class="diff-badge essay">Essay</span>
+            <span class="diff-badge easy">Skor 20</span>
+          </div>
+        </div>
+        <div class="toggle-btn">▼</div>
+      </div>
+      <div class="kisi-body">
+        <div class="soal-section">
+          <div class="soal-label">❓ Soal</div>
+          <div class="soal-text">Jelaskan pengertian <strong>Machine Learning</strong> dan bagaimana cara kerjanya! Berikan contoh penerapan Machine Learning yang ada di sekitar kehidupan kamu!</div>
+        </div>
+        <div class="kunci-section">
+          <div class="kunci-label">✅ Kunci Jawaban</div>
+          <div class="kunci-item">
+            <span class="kunci-bullet">📌</span>
+            <div>Silakan unggah file dokumen Koding AI untuk melihat kunci jawaban lengkap.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 4 -->
+    <div class="kisi-card" onclick="toggleCard(this)">
+      <div class="kisi-header">
+        <div class="soal-num">4</div>
+        <div class="kisi-meta">
+          <div class="materi-name">⚠️ Etika & Dampak AI</div>
+          <div class="tujuan-text">Menganalisis dampak positif-negatif AI dan isu etika dalam pengembangan AI</div>
+          <div class="difficulty-bar">
+            <span class="diff-badge hard">Sulit</span>
+            <span class="diff-badge essay">Essay</span>
+            <span class="diff-badge easy">Skor 20</span>
+          </div>
+        </div>
+        <div class="toggle-btn">▼</div>
+      </div>
+      <div class="kisi-body">
+        <div class="soal-section">
+          <div class="soal-label">❓ Soal</div>
+          <div class="soal-text">Sebutkan dan jelaskan <strong>dampak positif dan negatif</strong> penggunaan kecerdasan buatan (AI) di bidang pendidikan dan pekerjaan! Apa saja isu etika yang perlu diperhatikan?</div>
+        </div>
+        <div class="kunci-section">
+          <div class="kunci-label">✅ Kunci Jawaban</div>
+          <div class="kunci-item">
+            <span class="kunci-bullet">📌</span>
+            <div>Silakan unggah file dokumen Koding AI untuk melihat kunci jawaban lengkap.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 5 -->
+    <div class="kisi-card" onclick="toggleCard(this)">
+      <div class="kisi-header">
+        <div class="soal-num">5</div>
+        <div class="kisi-meta">
+          <div class="materi-name">🚀 Masa Depan AI & Karir</div>
+          <div class="tujuan-text">Mengidentifikasi peluang karir dan perkembangan AI di masa depan</div>
+          <div class="difficulty-bar">
+            <span class="diff-badge hard">Sulit</span>
+            <span class="diff-badge essay">Essay</span>
+            <span class="diff-badge easy">Skor 20</span>
+          </div>
+        </div>
+        <div class="toggle-btn">▼</div>
+      </div>
+      <div class="kisi-body">
+        <div class="soal-section">
+          <div class="soal-label">❓ Soal</div>
+          <div class="soal-text">Bagaimana perkembangan AI dan koding akan mempengaruhi dunia kerja di masa depan? Jelaskan <strong>peluang karir</strong> di bidang teknologi AI yang bisa kamu kejar setelah lulus SMK!</div>
+        </div>
+        <div class="kunci-section">
+          <div class="kunci-label">✅ Kunci Jawaban</div>
+          <div class="kunci-item">
+            <span class="kunci-bullet">📌</span>
+            <div>Silakan unggah file dokumen Koding AI untuk melihat kunci jawaban lengkap.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- UPLOAD NOTE -->
+  <div class="upload-note">
+    <div class="emoji">📂</div>
+    <h3>Kunci Jawaban Belum Tersedia</h3>
+    <p>File dokumen Koding AI belum berhasil diunggah sehingga kunci jawaban belum dapat ditampilkan.<br>Silakan hubungi guru pengampu atau unggah ulang file <strong>Koding_AI_X_Kisi_Soal_Kunci_STS.docx</strong> untuk mendapatkan kunci jawaban lengkap.</p>
+  </div>
+
+  <!-- TOPIC PREVIEW -->
+  <h2 class="section-title">🎯 Topik yang Dipelajari</h2>
+  <div class="topics-grid">
+    <div class="topic-card">
+      <div class="t-icon">🧠</div>
+      <h4>Kecerdasan Buatan</h4>
+      <p>Konsep dasar dan sejarah AI</p>
+    </div>
+    <div class="topic-card">
+      <div class="t-icon">🔁</div>
+      <h4>Algoritma</h4>
+      <p>Dasar pemrograman & logika</p>
+    </div>
+    <div class="topic-card">
+      <div class="t-icon">📊</div>
+      <h4>Machine Learning</h4>
+      <p>Cara kerja & penerapan ML</p>
+    </div>
+    <div class="topic-card">
+      <div class="t-icon">⚖️</div>
+      <h4>Etika AI</h4>
+      <p>Dampak sosial & isu etika</p>
+    </div>
+    <div class="topic-card">
+      <div class="t-icon">💼</div>
+      <h4>Karir Teknologi</h4>
+      <p>Peluang di era digital</p>
+    </div>
+    <div class="topic-card">
+      <div class="t-icon">🤖</div>
+      <h4>Chatbot & GPT</h4>
+      <p>AI generatif terkini</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>SMK Veteran 1 Sukoharjo · Koding & AI Kelas X · STS Genap 2025/2026</p>
+  <p style="margin-top:4px;">Guru Pengampu: Keke Rachma Devi, S.Kom</p>
+</footer>
+
+<script>
+function toggleCard(card) {
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
